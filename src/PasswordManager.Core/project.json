@@ -1,21 +1,37 @@
-﻿{
+{
   "version": "1.0.0-*",
   "description": "PasswordManager.Core Class Library",
   "authors": [ "gardn" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
-
   "frameworks": {
-    "net451": { },
+    "net451": {
+      "dependencies": {
+        "Serilog": "1.5.14"
+      }
+    },
     "dotnet5.4": {
       "dependencies": {
         "Microsoft.CSharp": "4.0.1-beta-23516",
         "System.Collections": "4.0.11-beta-23516",
         "System.Linq": "4.0.1-beta-23516",
         "System.Runtime": "4.0.21-beta-23516",
-        "System.Threading": "4.0.11-beta-23516"
+        "System.Threading": "4.0.11-beta-23516",
+        "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc1-final",
+        "Microsoft.Extensions.Configuration.Json": "1.0.0-*"
       }
     }
+  },
+  "dependencies": {
+    "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
+    "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
+    "Serilog": "2.0.0-beta-505",
+    "Serilog.Extensions.Logging": "1.0.0-rc1-final-10092",
+    "Serilog.Sinks.Seq": "2.0.0-beta-38",
+    "structuremap": "4.0.1.318"
   }
 }
