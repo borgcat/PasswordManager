@@ -21,3 +21,7 @@
 /// <reference path="../public/js/vendor.bundle.js" />
 /// <reference path="../public/js/vendor.js" />
 /// <reference path="../server.js" />
+/// <reference path="lib/bootstrap/dist/js/bootstrap.js" />
+/// <reference path="lib/jquery/dist/jquery.js" />
+/// <reference path="lib/magnific-popup/dist/jquery.magnific-popup.js" />
+/// <reference path="lib/toastr/toastr.js" />

@@ -6,11 +6,17 @@ namespace PasswordManager.Core.Interfaces
 {
     public interface IRepository<T> where T : IEntity 
     {
-        void Delete(T agregateRoot);
+        void Delete(T aggregateRoot);
         IQueryable<T> GetAll();
-        T GetById(string id);
-        T Insert(T agregateRoot);
-        T Update(T agregateRoot);
+
+        T GetById(string id, Func<T, T> cloner);
+
+        string Insert(T aggregateRoot);
+        T Insert(T aggregateRoot, Func<T, T> cloner);
+
+        bool Update(T aggregateRoot);
+        T Update(string id, Action<T> cloner);
+
         IQueryable<T> SearchFor(Expression<Func<T, bool>> predicate);
         bool EnsureRepository();
     }

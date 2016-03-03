@@ -5,29 +5,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Extensions.Configuration.EnvironmentVariables;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PasswordManager.Core
 {
     public class Startup
     {
-        private readonly IApplicationEnvironment _appenv;
-
-        public Startup(IApplicationEnvironment appenv)
+        public void ConfigureServices(IServiceCollection services)
         {
-            _appenv = appenv;
-
-            string sAppPath = appenv.ApplicationBasePath;
-            string sRootPath = Path.GetFullPath(Path.Combine(sAppPath, @"..\..\"));
-            string sBinFolderPath = @"artifacts\bin\" + appenv.ApplicationName;
-            string sBinPath = Path.Combine(sRootPath, sBinFolderPath);
+            // Add framework services.
+            
         }
+    }
 
-        void Initialize()
+
+
+    public static class StartupExtensions
+    {
+        public static Startup Initialize(this Startup startup)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(_appenv.ApplicationBasePath)
-                //.AddJsonFile($"config.{env.EnvironmentName}.json", optional: true),
-                .AddJsonFile("appsettings.json");
+            
+
+
+
+
+            return startup;
         }
     }
 }

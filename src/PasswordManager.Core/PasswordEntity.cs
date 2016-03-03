@@ -1,6 +1,6 @@
 using PasswordManager.Core.Interfaces;
 
-namespace FME.PasswordManager
+namespace PasswordManager.Core
 {
     public class PasswordEntity : IEntity
     {
