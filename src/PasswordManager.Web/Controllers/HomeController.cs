@@ -29,7 +29,7 @@ namespace PasswordManager.Web.Controllers
 
         public IActionResult Error()
         {
-            return View();
+            return View("~/Views/Shared/Error.cshtml");
         }
     }
 }
