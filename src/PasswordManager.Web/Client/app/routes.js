@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import {Route} from 'react-router';
+import {default as Router, Route} from 'react-router';
 import App from './components/App';
 import Login from './components/Login';
 import AddAccount from './components/AddAccount';

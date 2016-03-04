@@ -18,3 +18,5 @@
 /// <reference path="../client/app/stores/passwordtablestore.js" />
 /// <reference path="../Client/server.js" />
 /// <reference path="../gulpfile.js" />
+/// <reference path="js/vendor.bundle.js" />
+/// <reference path="js/vendor.js" />
