@@ -30,9 +30,16 @@ namespace PasswordManager.Api.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ServiceFilter(typeof(MasterKeyHeaderFilter))]
+        public PasswordEntity Get(string id)
         {
-            return "value";
+            return _repository.GetById(id, Cloner);
+        }
+
+        // api doesn't need a member cloner
+        private PasswordEntity Cloner(PasswordEntity passwordEntity)
+        {
+            return passwordEntity;
         }
 
         // POST api/values
@@ -45,14 +52,27 @@ namespace PasswordManager.Api.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [ServiceFilter(typeof(MasterKeyHeaderFilter))]
+        public PasswordEntity Put(string id, [FromBody]PasswordEntity entity)
         {
+            return _repository.Update(id, passwordEntity =>
+            {
+                passwordEntity.CommonName = entity.Password;
+                passwordEntity.Password = entity.Password;
+                passwordEntity.Url = entity.Url;
+                passwordEntity.UserName = entity.UserName;
+            });
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [ServiceFilter(typeof(MasterKeyHeaderFilter))]
+        public string Delete(string id)
         {
+            if (_repository.Delete(id))
+                return "Success";
+
+            return "Failure";
         }
     }
 }

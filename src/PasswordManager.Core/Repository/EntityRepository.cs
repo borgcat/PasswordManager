@@ -24,11 +24,19 @@ namespace PasswordManager.Core.Repository
             _passwordManagement = passwordManagement;
         }
 
-        public void Delete(T aggregateRoot)
+        public bool Delete(T aggregateRoot)
         {
             var records = _persistence.GetList();
-            records.Remove(aggregateRoot);
+
+            bool success = records.Remove(records.First(x=>x.Id == aggregateRoot.Id));
             _persistence.PutList(records);
+
+            return success;
+        }
+
+        public bool Delete(string id)
+        {
+            return Delete(GetById(id));
         }
 
         public IQueryable<T> GetAll()

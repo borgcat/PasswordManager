@@ -6,8 +6,10 @@ namespace PasswordManager.Core.Interfaces
 {
     public interface IRepository<T> where T : IEntity 
     {
-        void Delete(T aggregateRoot);
         IQueryable<T> GetAll();
+
+        bool Delete(T aggregateRoot);
+        bool Delete(string id);
 
         T GetById(string id, Func<T, T> cloner);
 
