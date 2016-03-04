@@ -19,6 +19,10 @@ var sourcemaps = require('gulp-sourcemaps');
 var lint = require('gulp-eslint');
 var project = require("./project.json");
 
+//var htmlreplace = require('gulp-html-replace');
+//var reactify = require('reactify');
+//var streamify = require('gulp-streamify');
+
 var paths = {
     webroot: "./" + project.webroot + "/"
 };
@@ -66,8 +70,8 @@ gulp.task('browserify-vendor', function () {
 });
 
 gulp.task('browserify', ['browserify-vendor'], function () {
-    return browserify({ entries: 'Client/app/main.js', debug: true })
-        .external(dependencies)
+    return browserify({ entries: './Client/app/main.js', debug: true })
+        //.external(dependencies)
         .transform(babelify, { presets: ['es2015', 'react'] })
         .bundle()
         .pipe(source('bundle.js'))
@@ -78,28 +82,34 @@ gulp.task('browserify', ['browserify-vendor'], function () {
         .pipe(gulp.dest(paths.webroot + '/js'));
 });
 
-//gulp.task('browserify-watch', ['browserify-vendor'], function () {
-//    var bundler = watchify(browserify({ entries: 'app/main.js', debug: true }, watchify.args));
-//    bundler.external(dependencies);
-//    bundler.transform(babelify, { presets: ['es2015', 'react'] });
-//    bundler.on('update', rebundle);
-//    return rebundle();
+gulp.task('browserify-watch', ['browserify-vendor'], function () {
+    var bundler = watchify(browserify({ entries: 'Client/app/main.js', debug: true }, watchify.args));
+    bundler.external(dependencies);
+    bundler.transform(babelify, { presets: ['es2015', 'react'] });
+    bundler.on('update', rebundle);
+    return rebundle();
 
-//    function rebundle() {
-//        var start = Date.now();
-//        return bundler.bundle()
-//            .on('error', function (err) {
-//                gutil.log(gutil.colors.red(err.toString()));
-//            })
-//            .on('end', function () {
-//                gutil.log(gutil.colors.green('Finished rebundling in', (Date.now() - start) + 'ms.'));
-//            })
-//            .pipe(source('bundle.js'))
-//            .pipe(buffer())
-//            .pipe(sourcemaps.init({ loadMaps: true }))
-//            .pipe(sourcemaps.write('.'))
-//            .pipe(gulp.dest('public/js/'));
-//    }
+    function rebundle() {
+        var start = Date.now();
+        return bundler.bundle()
+            .on('error', function (err) {
+                gutil.log(gutil.colors.red(err.toString()));
+            })
+            .on('end', function () {
+                gutil.log(gutil.colors.green('Finished rebundling in', (Date.now() - start) + 'ms.'));
+            })
+            .pipe(source('bundle.js'))
+            .pipe(buffer())
+            .pipe(sourcemaps.init({ loadMaps: true }))
+            .pipe(sourcemaps.write('.'))
+            .pipe(gulp.dest(paths.webroot + '/js'));
+    }
+});
+
+//gulp.task('transform', function () {
+//    gulp.src(path.JS)
+//      .pipe(react())
+//      .pipe(gulp.dest(path.DEST_SRC));
 //});
 
 //still working on theses to port from node to .NET core
@@ -120,7 +130,7 @@ gulp.task('lint', function () {
 
 
 gulp.task('watch', function () {
-    gulp.watch('app/stylesheets/**/*.less', ['styles']);
+    gulp.watch('Client/app/stylesheets/**/*.less', ['styles']);
 });
 
 gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'lint', 'watch']);
