@@ -7,6 +7,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PasswordManager.Api.Swagger;
 using PasswordManager.Core;
 using PasswordManager.Core.ConfigurationSettings;
 using PasswordManager.Core.Interfaces;
@@ -14,6 +15,7 @@ using PasswordManager.Core.Registry;
 using Serilog;
 using Serilog.Core;
 using StructureMap;
+using Swashbuckle.SwaggerGen;
 
 namespace PasswordManager.Api
 {
@@ -58,7 +60,10 @@ namespace PasswordManager.Api
             // Add framework services.
             services
                 .AddOptions()
-                .AddMvc();
+                .AddMvc(options =>
+                {
+                    options.RespectBrowserAcceptHeader = true;
+                });
 
             services.Configure<AppSettingsConfiguration>(Configuration.GetSection("AppSettings"));
             IContainer container = BootStrapStructureMap(services);
@@ -67,6 +72,20 @@ namespace PasswordManager.Api
             services.AddInstance(container.GetInstance<IConfigurationSettings>());
 
             services.AddScoped<MasterKeyHeaderFilter>();
+            services.AddScoped<EnsureMasterKeyHeaderFilter>();
+            services.AddSwaggerGen();
+
+            services.ConfigureSwaggerDocument(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "Password Management API",
+                    Description = "A simple api to manage encrypted password as Json in a encrypted file",
+                    TermsOfService = "None"
+                });
+                options.OperationFilter<AddMasterKeyHeaderParameter>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,6 +99,10 @@ namespace PasswordManager.Api
             app.UseStaticFiles();
 
             app.UseMvc();
+            app.UseSwaggerUi();
+            app.UseSwaggerGen();
+
+
         }
 
         // Entry point for the application.

@@ -22,8 +22,8 @@ namespace PasswordManager.Api.Controllers
             _repository = repository;
         }
 
-        // POST api/values
         [HttpGet]
+        [ServiceFilter(typeof(EnsureMasterKeyHeaderFilter))]
         public string Get()
         {
             var masterKey = HttpContext.Request.GetFirstHeaderValueOrDefault<string>("X-MasterKey");

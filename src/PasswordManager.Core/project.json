@@ -1,10 +1,5 @@
 {
-  "version": "1.0.0-*",
-  "description": "PasswordManager.Core Class Library",
   "authors": [ "gardn" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
   "dependencies": {
     "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
@@ -16,11 +11,16 @@
     "Serilog": "2.0.0-beta-505",
     "Serilog.Extensions.Logging": "1.0.0-rc1-final-10092",
     "Serilog.Sinks.Seq": "2.0.0-beta-38",
-    "structuremap": "4.0.1.318",
+    "structuremap": "4.1.0.361",
     "System.Linq.Queryable": "4.0.1-beta-23516",
     "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
   },
+  "description": "PasswordManager.Core Class Library",
   "frameworks": {
-     "dnxcore50": { }
-  }
+    "dnxcore50": { }
+  },
+  "licenseUrl": "",
+  "projectUrl": "",
+  "tags": [ "" ],
+  "version": "1.0.0-*"
 }

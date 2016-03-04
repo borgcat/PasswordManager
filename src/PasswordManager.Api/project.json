@@ -15,7 +15,8 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
     "PasswordManager.Core": "1.0.0-*",
-    "structuremap": "4.1.0.361"
+    "structuremap": "4.1.0.361",
+    "Swashbuckle": "6.0.0-rc1-final"
   },
 
   "commands": {
