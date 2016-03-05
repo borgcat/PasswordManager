@@ -1,15 +1,10 @@
 ﻿{
-  "name": "FMEPasswordManager",
+  "name": "PasswordManager",
   "description": "",
   "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": ""
-  },
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js"
   },
   "babel": {
     "presets": ["es2015", "react"]
@@ -48,7 +43,7 @@
     "gulp-plumber": "^1.0.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-streamify": "1.0.2",
-    "gulp-uglify": "^1.4.2",
+    "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.0"

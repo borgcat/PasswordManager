@@ -85,7 +85,7 @@ gulp.task('browserify:production', ['browserify-vendor:production'], function ()
 
 
 gulp.task('styles:production', function () {
-    return gulp.src('Clinet/app/stylesheets/main.less')
+    return gulp.src('Client/app/stylesheets/main.less')
         .pipe(plumber())
         .pipe(less())
         .pipe(autoprefixer())
