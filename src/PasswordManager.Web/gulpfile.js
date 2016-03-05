@@ -39,7 +39,7 @@ gulp.task('browserify-vendor:production', function () {
     return browserify()
         .require(dependencies)
         .bundle()
-        .pipe(source('vendor.bundle.js'))
+        .pipe(source('vendorBundle.js'))
         .pipe(buffer())
         .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest('wwwroot/js'));
@@ -104,5 +104,19 @@ gulp.task('watch', function () {
     gulp.watch('app/stylesheets/**/*.less', ['styles']);
 });
 
+gulp.task('application', function () {
+    return browserify('Client/app/main.js', { debug: true })
+        .transform("babelify", { presets: ["es2015", "react"] })
+        .external(dependencies)
+        .bundle()
+        .on('error', function (err) {
+            console.log('Error: ' + err.message);
+            this.emit('end');
+        })
+        .pipe(source(bundle.js))
+        .pipe(gulp.dest('wwwroot/js'));
+});
+
 gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'lint', 'watch']);
 gulp.task('build', ['styles', 'vendor', 'browserify']);
+
