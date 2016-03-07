@@ -1,6 +1,5 @@
 ﻿var gulp = require('gulp');
 var gutil = require('gulp-util');
-var gulpif = require('gulp-if');
 var autoprefixer = require('gulp-autoprefixer');
 var cssmin = require('gulp-cssmin');
 var less = require('gulp-less');
@@ -14,6 +13,8 @@ var watchify = require('watchify');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var lint = require('gulp-eslint');
+var babel = require('babel-core/register');
+//var react = require('gulp-react');
 
 var dependencies = [
     'alt',
@@ -100,22 +101,9 @@ gulp.task('lint', function () {
 });
 
 
-gulp.task('watch', function () {
-    gulp.watch('app/stylesheets/**/*.less', ['styles']);
-});
-
-gulp.task('application', function () {
-    return browserify('Client/app/main.js', { debug: true })
-        .transform("babelify", { presets: ["es2015", "react"] })
-        .external(dependencies)
-        .bundle()
-        .on('error', function (err) {
-            console.log('Error: ' + err.message);
-            this.emit('end');
-        })
-        .pipe(source(bundle.js))
-        .pipe(gulp.dest('wwwroot/js'));
-});
+//gulp.task('watch', function () {
+//    gulp.watch('app/stylesheets/**/*.less', ['styles']);
+//});
 
 gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'lint', 'watch']);
 gulp.task('build', ['styles', 'vendor', 'browserify']);
