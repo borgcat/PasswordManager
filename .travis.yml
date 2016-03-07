@@ -1,6 +1,6 @@
 language: csharp
 script:
-  - xbuild /p:Configuration=Debug /src/PasswordManager.sln
+  - xbuild /p:Configuration=Debug src/PasswordManager.sln
 before_install:
   - sudo apt-get install nunit-console
 before_script:
