@@ -3,8 +3,24 @@ import {Link} from 'react-router';
 
 
 class PasswordTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = PasswordTableStore.getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    componentDidMount() {
+        PasswordTableStore.listen(this.onChange);
+    }
+
+    componentWillUnmount() {
+        PassowordTableStore.unlisten(this.onChange);
+    }
+
+    onChange(state){
+        this.setState(state);
+    }
     render() {
-    {/*TODO: add state and lifecycle hooks for pulling data from .NET API*/}
         return (
             <div className="container">
                 {/* Banner */}
