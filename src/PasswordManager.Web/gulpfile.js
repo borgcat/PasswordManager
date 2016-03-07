@@ -74,6 +74,6 @@ gulp.task('lint', function () {
         .pipe(lint.format());
 });
 
-gulp.task('default', ['styles', 'vendor', 'lint']);
+gulp.task('default', ['styles:production', 'vendor:production', 'lint']);
 gulp.task('build', ['styles', 'vendor', 'browserify']);
 
