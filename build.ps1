@@ -60,7 +60,7 @@ if (!(Test-Path $buildFolder)) {
 
     # Cleanup
     if (Test-Path $tempFolder) {
-        Remove-Item -Recurse -Force $tempFolder
+        #Remove-Item -Recurse -Force $tempFolder
     }
 }
 

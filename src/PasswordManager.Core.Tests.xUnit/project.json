@@ -10,7 +10,7 @@
     "PasswordManager.Core": "1.0.0-*",
     "Serilog": "2.0.0-beta-507",
     "Shouldly": "2.7.0-beta0003",
-    "structuremap": "4.0.1.318",
+    "structuremap": "4.1.0.361",
     "System.Collections": "4.0.11-beta-23516",
     "System.Linq": "4.0.1-beta-23516",
     "System.Runtime": "4.0.21-beta-23516",

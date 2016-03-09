@@ -1,0 +1,3 @@
+{
+    "projects": ["src/PasswordManager.Core","src/PasswordManager.Api", "src/PasswordManager.Web", "src/PasswordManager.Core.Tests.xUnit"]
+}
