@@ -3,6 +3,7 @@ TeamCity Build Status <br/>
 <img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildId:1/statusIcon"/>
 </a>
 
+<script type="text/javascript" src="http://teamcity.sdi.sogetilabs.com:8112/externalStatus.html?js=1"></script>
 
 # PasswordManager
 
