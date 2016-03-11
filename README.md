@@ -10,4 +10,3 @@ TeamCity Build Status <br/>
 
 C# Password Manager using Json Repository using Asp.Net Core 1.0
 
-Demo to Mark Rizzo
