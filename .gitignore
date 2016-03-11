@@ -39,4 +39,5 @@ node_modules
 *.sln.ide
 project.lock.json
 .build/
+.publish/
 .testpublish/

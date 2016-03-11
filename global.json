@@ -1,3 +1,8 @@
 {
-    "projects": ["src/PasswordManager.Core","src/PasswordManager.Api", "src/PasswordManager.Web", "src/PasswordManager.Core.Tests.xUnit"]
+    "projects": ["src/PasswordManager.Core","src/PasswordManager.Api", "src/PasswordManager.Web", "src/PasswordManager.Core.Tests.xUnit"],
+	"sdk": {
+        "version": "1.0.0-rc1-update1",
+        "runtime": "coreclr",
+        "architecture": "x64"
+  }
 }

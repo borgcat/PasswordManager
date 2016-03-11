@@ -1,67 +1,59 @@
-$ErrorActionPreference = "Stop"
+$branch = "master"
+$sourceDir = $PSScriptRoot;
+$buildConfiguration = "release";
 
-function DownloadWithRetry([string] $url, [string] $downloadLocation, [int] $retries) 
+Write-Host '----------------------------------------'
+Write-Host '       Parameters'
+Write-Host '----------------------------------------'
+Write-Host $PSScriptRoot
+Write-Host '----------------------------------------'
+
+ # bootstrap DNVM into this session.
+&{$branch;iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))}
+
+# load up the global.json so we can find the DNX version
+$globalJson = Get-Content -Path $PSScriptRoot\global.json -Raw -ErrorAction Ignore | ConvertFrom-Json -ErrorAction Ignore
+
+if($globalJson)
 {
-    while($true)
-    {
-        try
-        {
-            Invoke-WebRequest $url -OutFile $downloadLocation
-            break
-        }
-        catch
-        {
-            $exceptionMessage = $_.Exception.Message
-            Write-Host "Failed to download '$url': $exceptionMessage"
-            if ($retries -gt 0) {
-                $retries--
-                Write-Host "Waiting 10 seconds before retrying. Retries left: $retries"
-                Start-Sleep -Seconds 10
-
-            }
-            else 
-            {
-                $exception = $_.Exception
-                throw $exception
-            }
-        }
-    }
+    $dnxVersion = $globalJson.sdk.version
 }
-
-cd $PSScriptRoot
-
-$repoFolder = $PSScriptRoot
-$env:REPO_FOLDER = $repoFolder
-
-$koreBuildZip="https://github.com/aspnet/KoreBuild/archive/dev.zip"
-if ($env:KOREBUILD_ZIP)
+else
 {
-    $koreBuildZip=$env:KOREBUILD_ZIP
+    Write-Warning "Unable to locate global.json to determine using 'latest'"
+    $dnxVersion = "latest"
 }
 
-$buildFolder = ".build"
-$buildFile="$buildFolder\KoreBuild.ps1"
+# install DNX
+# only installs the default (x86, clr) runtime of the framework.
+# If you need additional architectures or runtimes you should add additional calls
+# ex: & $env:USERPROFILE\.dnx\bin\dnvm install $dnxVersion -r coreclr
+& $env:USERPROFILE\.dnx\bin\dnvm install $dnxVersion -Persistent
 
-if (!(Test-Path $buildFolder)) {
-    Write-Host "Downloading KoreBuild from $koreBuildZip"    
-    
-    $tempFolder=$env:TEMP + "\KoreBuild-" + [guid]::NewGuid()
-    New-Item -Path "$tempFolder" -Type directory | Out-Null
-
-    $localZipFile="$tempFolder\korebuild.zip"
-    
-    DownloadWithRetry -url $koreBuildZip -downloadLocation $localZipFile -retries 6
-
-    Add-Type -AssemblyName System.IO.Compression.FileSystem
-    [System.IO.Compression.ZipFile]::ExtractToDirectory($localZipFile, $tempFolder)
-    
-    New-Item -Path "$buildFolder" -Type directory | Out-Null
-    copy-item "$tempFolder\**\build\*" $buildFolder -Recurse
-
-    # Cleanup
-    if (Test-Path $tempFolder) {
-        #Remove-Item -Recurse -Force $tempFolder
-    }
+# run DNU restore on all project.json files in the src folder including 2>1 to redirect stderr to stdout for badly behaved tools
+Write-Host "===== RESTORE <-- done in Prebuild.ps1 ====="
+<# foreach ($project in $globalJson.projects) {
+    Write-Host 'restoring project: ' $PSScriptRoot\$project\project.json
+    & dnu restore $PSScriptRoot\$project\project.json 
+}
+ #>
+ 
+# run DNU build on all project.json files in the src folder including 2>1 to redirect stderr to stdout for badly behaved tools
+Write-Host "===== BUILD ====="
+foreach ($project in $globalJson.projects) {
+    Write-Host 'Building project: ' $PSScriptRoot\$project\project.json
+    & dnu build $PSScriptRoot\$project\project.json --configuration "$buildConfiguration" 
 }
 
-&"$buildFile" $args
+# run DNU publish on all project.json files in the src folder including 2>1 to redirect stderr to stdout for badly behaved tools
+Write-Host "===== PUBLISH <-- done in postbuild.ps1 ====="
+<#
+ foreach ($project in $globalJson.projects) {
+    Write-Host 'publishing project: ' $PSScriptRoot\$project\project.json
+    & dnu publish $PSScriptRoot\$project\project.json --configuration "$buildConfiguration" -o "./pub"
+} #>
+
+# workaround for what seems a bug in dnu not copying runtimes
+#Write-Host ("Copy runtimes to {0}\approot" -f $sourceDir)
+#Copy-Item $env:USERPROFILE\.dnx\runtimes $sourceDir\approot -Recurse
+
