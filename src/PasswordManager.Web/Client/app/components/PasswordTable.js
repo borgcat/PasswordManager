@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
+import PasswordTableStore from '../stores/PasswordTableStore'
+import PasswordTableActions from '../actions/PasswordTableActions';
 
 
 class PasswordTable extends React.Component {
