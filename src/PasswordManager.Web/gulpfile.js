@@ -59,6 +59,18 @@ gulp.task('browserify:production', ['browserify-vendor:production'], function ()
         .pipe(gulp.dest('wwwroot/js'));
 });
 
+gulp.task('dev-browserify', function () {
+    return browserify({ entries: 'Client/app/main.js', debug: true })
+        .external(dependencies)
+        .transform(babelify, { presets: ['es2015', 'react'] })
+        .bundle()
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({ loadMaps: true }))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('wwwroot/js'));
+});
+
 gulp.task('styles:production', function () {
     return gulp.src('Client/app/stylesheets/main.less')
         .pipe(plumber())
