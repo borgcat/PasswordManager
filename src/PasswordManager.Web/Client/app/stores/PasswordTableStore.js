@@ -4,16 +4,16 @@ import PasswordTableActions from '../actions/PasswordTableActions';
 class PasswordTableStore {
     constructor() {
         this.bindActions(PasswordTableActions);
+        this.table = {};
     }
 
-    onAddCharacterSuccess(successMessage) {
-        this.nameValidationState = 'has-success';
-        this.helpBlock = successMessage;
+    onSetTableSuccess(data) {
+        this.table = data;
     }
 
-    onAddCharacterFail(errorMessage) {
-        this.nameValidationState = 'has-error';
-        this.helpBlock = errorMessage;
+    onSetTableFailure(jqXhr) {
+        // Handle multiple response formats, fallback to HTTP status code number.
+        toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
     }
 }
 
