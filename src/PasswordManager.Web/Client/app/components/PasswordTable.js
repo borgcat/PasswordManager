@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import ajax from 'superagent';
 import PasswordTableStore from '../stores/PasswordTableStore'
 import PasswordTableActions from '../actions/PasswordTableActions';
 
@@ -10,7 +11,19 @@ class PasswordTable extends React.Component {
         this.state = PasswordTableStore.getState();
         this.onChange = this.onChange.bind(this);
     }
-
+    
+    componentWillMount() {
+    ajax.get('/Home/GetListOfPassword')
+        .end((error, response) => {
+            if (!error && response) {
+                this.setState({ passwords: response.body });
+            } else {
+                console.log('Avery is an error', error);
+            }
+        }
+    );
+}
+    
     componentDidMount() {
         PasswordTableStore.listen(this.onChange);
     }
@@ -31,8 +44,9 @@ class PasswordTable extends React.Component {
                         Table Component
                     </div>
                 </div>
-
-                {/* table */}
+                <div>{this.props.passwords}</div>
+                
+                {/*{/* table 
                 <div className="row">
                     <div className="table-responsive">
                         <table className="table table-hover">
@@ -62,46 +76,14 @@ class PasswordTable extends React.Component {
                                             <button type='submit' className='btn btn-info'>Edit</button>
                                         </Link>
                                     </td>
-                                </tr>
-                                <tr className="text-center">
-                                    <td>
-                                        <Link to={'/table/'}>
-                                            <button type='submit' className='btn btn-warning'>Details</button>
-                                        </Link>
-                                    </td>
-                                    <td>twitter.com</td>
-                                    <td>password1!</td>
-                                    <td>email.twitter@gmail.com</td>
-                                    <td>user2</td>
-                                    <td>
-                                        <Link to={'/table/'}>
-                                            <button type='submit' className='btn btn-info'>Edit</button>
-                                        </Link>
-                                    </td>
-                                </tr>
-                                <tr className="text-center">
-                                    <td>
-                                        <Link to={'/table/'}>
-                                            <button type='submit' className='btn btn-warning'>Details</button>
-                                        </Link>
-                                    </td>
-                                    <td>bank.com</td>
-                                    <td>p@ssword1</td>
-                                    <td>email.bank@gmail.com</td>
-                                    <td>user3</td>
-                                    <td>
-                                        <Link to={'/table/'}>
-                                            <button type='submit' className='btn btn-info'>Edit</button>
-                                        </Link>
-                                    </td>
-                                </tr>
+                                </tr>                                
                             </tbody>
                         </table>
                     </div>
                     <Link to={'/add/'}>
                         <button type='submit' className='btn btn-primary pull-right'>Add Account</button>
                     </Link>
-                </div>
+                </div>*/}
             </div>
         );
     }
