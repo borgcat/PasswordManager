@@ -9,7 +9,10 @@ $PSScriptRoot = $workdir
 Write-Host '----------------------------------------'
 Write-Host '       Parameters'
 Write-Host '----------------------------------------'
-Write-Host $PSScriptRoot
+Write-Host 'PSScriptRoot' $PSScriptRoot
+Write-Host 'workdir' $workdir
+Write-Host 'project' $project
+Write-Host 'buildConfiguration' $buildConfiguration
 Write-Host '----------------------------------------'
 
  # bootstrap DNVM into this session.
