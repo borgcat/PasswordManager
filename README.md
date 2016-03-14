@@ -17,16 +17,19 @@
 	
 	<tr>
 		<td>
+			<div>Master TeamCity Build</div>
+			<div><a href="http://teamcity.sdi.sogetilabs.com:8112/viewType.html?buildTypeId=SogetiUSAPasswordManager_DnuCommandLineBuildAndPublish&tab=buildTypeStatusDiv&branch_SogetiUSAPasswordManager=__all_branches__&guest=1">
+						<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildId:1/statusIcon"/>
+						</a></div>
+			
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
-						Master TeamCity Build
+						
 					</td>
 					
 					<td>
-						<a href="http://teamcity.sdi.sogetilabs.com:8112/viewType.html?buildTypeId=SogetiUSAPasswordManager_DnuCommandLineBuildAndPublish&tab=buildTypeStatusDiv&branch_SogetiUSAPasswordManager=__all_branches__&guest=1">
-						<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildId:1/statusIcon"/>
-						</a>
+						
 					</td>
 				</tr>
 			</table>
