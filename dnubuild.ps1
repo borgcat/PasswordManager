@@ -1,7 +1,10 @@
 param(
-    [parameter(Mandatory=$true)] [string]$project,
+    [parameter(Mandatory=$true)] [string]$workdir,
+	[parameter(Mandatory=$true)] [string]$project,
     [parameter(Mandatory=$true)] [string]$buildConfiguration
 )
+
+$PSScriptRoot = workdir
 
 Write-Host '----------------------------------------'
 Write-Host '       Parameters'
