@@ -25,9 +25,9 @@ try{
 
 	Write-Host 'publishing project: ' $PSScriptRoot\$project\project.json
 	& dnu publish $PSScriptRoot\$project\project.json --configuration "$buildConfiguration"  --wwwroot "wwwroot" --wwwroot-out "wwwroot" -o "./" + $publishLocation --iis-command "api" --quiet
-
-   C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -source:IisApp="./" + $publishLocation -dest:IisApp='sogeti-api-passwordmanager',ComputerName='https://sogeti-api-passwordmanager.scm.azurewebsites.net/msdeploy.axd',UserName='$sogeti-api-passwordmanager',Password='GiLeFFXJhiCsymLaMclq95jo7uDvx9wxRgg3yB7jk2s4NpQSYBrfpcbjolrE',IncludeAcls='False',AuthType='Basic' -verb:sync -enableLink:contentLibExtension  -retryAttempts:2]
 }
 catch{
     "An error occurred during publish.`n{0}" -f $_.Exception.Message | Write-Error
 }
+
+  & C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -source:IisApp="./" + $publishLocation -dest:IisApp='sogeti-api-passwordmanager',ComputerName='https://sogeti-api-passwordmanager.scm.azurewebsites.net/msdeploy.axd',UserName='$sogeti-api-passwordmanager',Password='GiLeFFXJhiCsymLaMclq95jo7uDvx9wxRgg3yB7jk2s4NpQSYBrfpcbjolrE',IncludeAcls='False',AuthType='Basic' -verb:sync -enableLink:contentLibExtension  -retryAttempts:2
