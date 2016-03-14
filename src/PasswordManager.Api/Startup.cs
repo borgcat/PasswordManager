@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
@@ -7,6 +8,8 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.PlatformAbstractions;
 using PasswordManager.Api.Swagger;
 using PasswordManager.Core;
 using PasswordManager.Core.ConfigurationSettings;
@@ -21,8 +24,12 @@ namespace PasswordManager.Api
 {
     public class Startup
     {
+        private readonly IHostingEnvironment _env;
+
         public Startup(IHostingEnvironment env)
         {
+            _env = env;
+
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
@@ -65,8 +72,12 @@ namespace PasswordManager.Api
                     options.RespectBrowserAcceptHeader = true;
                 });
 
+      
             services.Configure<AppSettingsConfiguration>(Configuration.GetSection("AppSettings"));
             IContainer container = BootStrapStructureMap(services);
+
+            var configurationsettings = container.GetInstance<IConfigurationSettings>();
+            configurationsettings.StorageLocation = String.Format("{0}\\",_env.MapPath("app_data"));
 
             services.AddInstance(container.GetInstance<IRepository<PasswordEntity>>());
             services.AddInstance(container.GetInstance<IConfigurationSettings>());
@@ -101,8 +112,6 @@ namespace PasswordManager.Api
             app.UseMvc();
             app.UseSwaggerUi();
             app.UseSwaggerGen();
-
-
         }
 
         // Entry point for the application.

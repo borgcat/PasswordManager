@@ -20,7 +20,8 @@
   },
 
   "commands": {
-    "api": "Microsoft.AspNet.Server.Kestrel"
+    "api": "Microsoft.AspNet.Server.Kestrel",
+    "web": "Microsoft.AspNet.Server.Kestrel"
   },
 
   "frameworks": {

@@ -10,14 +10,17 @@ namespace PasswordManager.Core.ConfigurationSettings
         private readonly IKeyPersistenceStrategy _keyPersistenceStrategy;
         private readonly IOptions<AppSettingsConfiguration> _appSettings;
 
-        private string _encryptedMasterKey = String.Empty;
+        private string _encryptedMasterKey;
         public ConfigurationSettings(IKeyPersistenceStrategy keyPersistenceStrategy, IOptions<AppSettingsConfiguration> appSettings)
         {
             _keyPersistenceStrategy = keyPersistenceStrategy;
             _appSettings = appSettings;
+
+            if(!String.IsNullOrEmpty(_appSettings.Value.StorageLocation))
+                StorageLocation = _appSettings.Value.StorageLocation;
         }
 
-        public string StorageLocation => _appSettings.Value.StorageLocation;
+        public string StorageLocation { get; set; }
 
         public string EncryptionSalt
         {

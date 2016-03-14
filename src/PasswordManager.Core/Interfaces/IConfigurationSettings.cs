@@ -2,7 +2,7 @@
 {
     public interface IConfigurationSettings
     {
-        string StorageLocation { get; }
+        string StorageLocation { get; set; }
         string EncriptedFileName { get; }
         string EncryptionSalt { get; set; }
         string GetFullPath();
