@@ -25,6 +25,8 @@ else
     $dnxVersion = "latest"
 }
 
+& $env:USERPROFILE\.dnx\bin\dnvm install $dnxVersion -Persistent
+
 # run DNU restore on all project.json files in the src folder including 2>1 to redirect stderr to stdout for badly behaved tools
 Write-Host "===== RESTORE <-- done in Prebuild.ps1 ====="
 Write-Host 'restoring project: ' $PSScriptRoot\$project\project.json
