@@ -74,7 +74,8 @@ try{
 }
 catch{
     "An error occurred during publish.`n{0}" -f $_.Exception.Message | Write-Error
-    exit 1
+     ##teamcity[buildStatus status='FAILURE']
+    [System.Environment]::Exit(1)
 }
 
 
