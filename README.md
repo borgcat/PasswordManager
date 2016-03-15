@@ -24,7 +24,7 @@
 		</td>
 		<td>
 			<a href="http://teamcity.sdi.sogetilabs.com:8112/viewType.html?buildTypeId=SogetiUSAPasswordManager_DnuCommandLineBuildAndPublish&tab=buildTypeStatusDiv&branch_SogetiUSAPasswordManager=__all_branches__&guest=1">
-				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildId:1/statusIcon"/>
+				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildType:(SogetiUSAPasswordManager_DnuCommandLineBuildAndPublish)/statusIcon"/>
 			</a>
 		</td>
 	</tr>
@@ -34,7 +34,7 @@
 		</td>
 		<td>
 			<a href="http://teamcity.sdi.sogetilabs.com:8112/viewType.html?buildTypeId=SogetiUSAPasswordManager_ApiBuild&tab=buildTypeStatusDiv&branch_SogetiUSAPasswordManager=__all_branches__&guest=1">
-				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildId:2/statusIcon"/>
+				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildType:(SogetiUSAPasswordManager_ApiBuild)/statusIcon"/>
 			</a>
 		</td>
 	</tr>
