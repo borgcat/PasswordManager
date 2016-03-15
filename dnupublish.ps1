@@ -32,6 +32,7 @@ Write-Host 'build configuration: ' $buildConfiguration
 Write-Host 'published dest: ' $azureAppSite
 Write-Host 'published computername: ' $azureComputerName
 Write-Host 'published username: ' $azureUserName
+Write-Host 'published runtime: ' $publishRuntime
 Write-Host '----------------------------------------'
 Write-Host
 
@@ -69,7 +70,6 @@ try{
     $iisDestProvider = "IisApp='{0}',ComputerName='{1}',UserName='{2}',Password='{3}',IncludeAcls='False',AuthType='Basic'" -f $azureAppSite, $azureComputerName, $azureUserName, $azurePassword
         
 	Write-Host "===== DEPLOY  ====="	
-	Write-Host $msDeploy -source:IisApp=$iisDeployApp -dest:$iisDestProvider -verb:sync -enableLink:contentLibExtension  -retryAttempts:2
 	&$msDeploy -source:IisApp=$iisDeployApp -dest:$iisDestProvider -verb:sync -enableLink:contentLibExtension  -retryAttempts:2
 }
 catch{
