@@ -27,6 +27,11 @@
 				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildType:(SogetiUSAPasswordManager_DnuCommandLineBuildAndPublish)/statusIcon"/>
 			</a>
 		</td>
+		<td>
+			<a href="http://teamcity.sdi.sogetilabs.com:8112/viewType.html?buildTypeId=SogetiUSAPasswordManager_XUnitTests&tab=buildTypeStatusDiv&branch_SogetiUSAPasswordManager=__all_branches__&guest=1">
+				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildType:(SogetiUSAPasswordManager_XUnitTests)/statusIcon"/>
+			</a>
+		</td>
 	</tr>
 	<tr>
 		<td>
