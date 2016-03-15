@@ -18,8 +18,10 @@ else
 # only installs the default (x86, clr) runtime of the framework.
 # If you need additional architectures or runtimes you should add additional calls
 # ex: & $env:USERPROFILE\.dnx\bin\dnvm install $dnxVersion -r coreclr
-& $env:USERPROFILE\.dnx\bin\dnvm install $dnxVersion -r clr -Persistent
-& $env:USERPROFILE\.dnx\bin\dnvm install $dnxVersion -r coreclr -Persistent
+& $env:USERPROFILE\.dnx\bin\dnvm install $dnxVersion -r clr -arch x86 -Persistent
+& $env:USERPROFILE\.dnx\bin\dnvm install $dnxVersion -r coreclr -arch x86 -Persistent
+& $env:USERPROFILE\.dnx\bin\dnvm install $dnxVersion -r clr -arch x64 -Persistent
+& $env:USERPROFILE\.dnx\bin\dnvm install $dnxVersion -r coreclr -arch x64 -Persistent
 
 & $env:USERPROFILE\.dnx\bin\dnvm use $dnxVersion -r coreclr -Persistent
 
