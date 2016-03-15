@@ -56,7 +56,6 @@ $iisDeployApp = "{0}\wwwroot" -f $iisApp
 Write-Host 'published location: ' $iisApp
 
 try{
-
 	Write-Host 'publishing project: ' $PSScriptRoot\$project\project.json
 	& dnu publish $PSScriptRoot\$project\project.json --configuration "$buildConfiguration"  --wwwroot "wwwroot" --wwwroot-out "wwwroot" -o $iisApp --iis-command "api" --quiet
     $msDeploy = "C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe"
