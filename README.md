@@ -5,7 +5,10 @@
 <table border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td>
-			Build Status
+			Build 
+		</td>
+		<td>
+			Status 
 		</td>
 		<td>
 			Test Status
@@ -18,17 +21,21 @@
 	<tr>
 		<td>
 			Master TeamCity Build
+		</td>
+		<td>
 			<a href="http://teamcity.sdi.sogetilabs.com:8112/viewType.html?buildTypeId=SogetiUSAPasswordManager_DnuCommandLineBuildAndPublish&tab=buildTypeStatusDiv&branch_SogetiUSAPasswordManager=__all_branches__&guest=1">
 				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildId:1/statusIcon"/>
 			</a>
 		</td>
+	</tr>
+	<tr>
 		<td>
 			DIT Build
+		</td>
+		<td>
 			<a href="http://teamcity.sdi.sogetilabs.com:8112/viewType.html?buildTypeId=SogetiUSAPasswordManager_ApiBuild&tab=buildTypeStatusDiv&branch_SogetiUSAPasswordManager=__all_branches__&guest=1">
 				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildId:2/statusIcon"/>
 			</a>
-		</td>
-		<td>
 		</td>
 	</tr>
 </table>

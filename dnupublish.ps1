@@ -56,6 +56,11 @@ $iisDeployApp = "{0}\wwwroot" -f $iisApp
 Write-Host 'published location: ' $iisApp
 
 try{
+	#run DNU restore on project.json files in the src folder
+	Write-Host "===== RESTORE <-- done in Prebuild.ps1 ====="
+	Write-Host 'restoring project: ' $PSScriptRoot\$project\project.json
+	& dnu restore $PSScriptRoot\$project\project.json 
+	
 	Write-Host 'publishing project: ' $PSScriptRoot\$project\project.json
 	& dnu publish $PSScriptRoot\$project\project.json --configuration "$buildConfiguration"  --wwwroot "wwwroot" --wwwroot-out "wwwroot" -o $iisApp --iis-command "api" --quiet
     $msDeploy = "C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe"
