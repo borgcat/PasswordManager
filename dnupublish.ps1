@@ -67,8 +67,10 @@ try{
 	& dnu publish $PSScriptRoot\$project\project.json --configuration "$buildConfiguration"  --wwwroot "wwwroot" --wwwroot-out "wwwroot" -o $iisApp --iis-command "api" --runtime $publishRuntime
     $msDeploy = "C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe"
     $iisDestProvider = "IisApp='{0}',ComputerName='{1}',UserName='{2}',Password='{3}',IncludeAcls='False',AuthType='Basic'" -f $azureAppSite, $azureComputerName, $azureUserName, $azurePassword
-    
-    #&$msDeploy -source:IisApp=$iisDeployApp -dest:$iisDestProvider -verb:sync -enableLink:contentLibExtension  -retryAttempts:2
+        
+	Write-Host "===== DEPLOY  ====="	
+	Write-Host &$msDeploy -source:IisApp=$iisDeployApp -dest:$iisDestProvider -verb:sync -enableLink:contentLibExtension  -retryAttempts:2
+	&$msDeploy -source:IisApp=$iisDeployApp -dest:$iisDestProvider -verb:sync -enableLink:contentLibExtension  -retryAttempts:2
 }
 catch{
     "An error occurred during publish.`n{0}" -f $_.Exception.Message | Write-Error
