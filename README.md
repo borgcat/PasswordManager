@@ -44,10 +44,9 @@
 		</td>
 	</tr>
 </table>
-
-
-
-
+<br/>
+<img src="https://img.shields.io/github/commits-since/SogetiUSA/PasswordManager/1.0.0.svg"/>
+<br/>
 
 # PasswordManager
 
