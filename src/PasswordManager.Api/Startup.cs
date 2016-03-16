@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
@@ -25,7 +26,6 @@ namespace PasswordManager.Api
     public class Startup
     {
         private readonly IHostingEnvironment _env;
-
         public Startup(IHostingEnvironment env)
         {
             _env = env;

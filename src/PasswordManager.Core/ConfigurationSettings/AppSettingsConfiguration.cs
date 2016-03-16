@@ -6,5 +6,6 @@ namespace PasswordManager.Core.ConfigurationSettings
         public string FileName { get; set; }
         public string EncryptionSalt { get; set; }
         public string EnvironmentName { get; set; }
+        public string ProjectVersion { get; set; }
     }
 }
