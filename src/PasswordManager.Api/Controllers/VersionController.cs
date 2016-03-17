@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,7 +24,21 @@ namespace PasswordManager.Api.Controllers
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             .InformationalVersion;
 
-            return Content(String.Format("PasswordManager.Api Version: {0}", projectVersion));
+            var json = new
+            {
+                PasswordManager = new
+                {
+                    Project = new
+                    {
+                        Api = new
+                        {
+                            Version = projectVersion
+                        }
+                    }
+                }
+            };
+
+            return Content(JsonConvert.SerializeObject(json));
         }
     }
 }
