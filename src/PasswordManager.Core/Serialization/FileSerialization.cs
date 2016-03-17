@@ -31,7 +31,7 @@ namespace PasswordManager.Core.Serialization
             }
         }
 
-        private static void WriteToFile(string filePath, string text, int retries)
+        private void WriteToFile(string filePath, string text, int retries)
         {
             const int maxRetries = 20;
             try
@@ -44,7 +44,7 @@ namespace PasswordManager.Core.Serialization
                     }
                 }
             }
-            catch (IOException)
+            catch (IOException ioex)
             {
                 if (retries < maxRetries)
                 {
@@ -53,6 +53,7 @@ namespace PasswordManager.Core.Serialization
                 }
                 else
                 {
+                    _logger.Error(ioex.Message);
                     throw new Exception(String.Format("Max retries for file write reached: {0}", filePath));
                 }
             }
