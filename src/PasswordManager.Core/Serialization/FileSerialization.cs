@@ -36,11 +36,24 @@ namespace PasswordManager.Core.Serialization
             const int maxRetries = 20;
             try
             {
-                using (var fs = File.Open(filePath, FileMode.Truncate))
+                if (File.Exists(filePath) == false)
                 {
-                    using (var sw = new StreamWriter(fs))
+                    using (var fs = File.Create(filePath))
                     {
-                        sw.WriteLine(text);
+                        using (var sw = new StreamWriter(fs))
+                        {
+                            sw.WriteLine(text);
+                        }
+                    }
+                }
+                else
+                {
+                    using (var fs = File.Open(filePath, FileMode.Truncate))
+                    {
+                        using (var sw = new StreamWriter(fs))
+                        {
+                            sw.WriteLine(text);
+                        }
                     }
                 }
             }

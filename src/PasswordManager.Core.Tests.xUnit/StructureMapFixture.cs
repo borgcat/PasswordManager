@@ -33,8 +33,17 @@ namespace PasswordManager.Core.Tests.xUnit
             configurationSettings.StorageLocation = String.Format("{0}\\", tempPath);
         }
 
+        public void Cleanup()
+        {
+            var configurationSettings = Container.GetInstance<IConfigurationSettings>();
+
+            if (File.Exists(configurationSettings.GetFullPath()))
+                File.Delete(configurationSettings.GetFullPath());
+        }
+
         public void Dispose()
         {
+            Cleanup();
         }
 
         public IContainer Container { get; private set; }

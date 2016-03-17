@@ -23,6 +23,8 @@ namespace PasswordManager.Core.Tests.xUnit
             var configurationSettings = _fixture.Container.GetInstance<IConfigurationSettings>();
             configurationSettings.MasterKey = "Test1234";
 
+            _fixture.Cleanup();
+
             ISerialization<PasswordEntity> entityPersistence = _fixture.Container.GetInstance<ISerialization<PasswordEntity>>();
 
             bool success = entityPersistence.SerializeObject(new PasswordEntity

@@ -25,6 +25,10 @@ namespace PasswordManager.Core.Tests.xUnit
             configurationSettings.MasterKey = "Test1234";
             IEntityPersistence<PasswordEntity> entityPersistence = _fixture.Container.GetInstance<IEntityPersistence<PasswordEntity>>();
 
+            _fixture.Cleanup();
+            entityPersistence.EnsureList();
+
+
             bool success = entityPersistence.PutList(new List<PasswordEntity>
             {
                 new PasswordEntity
