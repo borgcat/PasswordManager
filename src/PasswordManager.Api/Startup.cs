@@ -76,8 +76,8 @@ namespace PasswordManager.Api
             services.Configure<AppSettingsConfiguration>(Configuration.GetSection("AppSettings"));
             IContainer container = BootStrapStructureMap(services);
 
-            var configurationsettings = container.GetInstance<IConfigurationSettings>();
-            configurationsettings.StorageLocation = String.Format("{0}\\",_env.MapPath("app_data"));
+                var configurationsettings = container.GetInstance<IConfigurationSettings>();
+                configurationsettings.StorageLocation = String.Format("{0}\\",_env.MapPath("app_data"));
 
             services.AddInstance(container.GetInstance<IRepository<PasswordEntity>>());
             services.AddInstance(container.GetInstance<IConfigurationSettings>());

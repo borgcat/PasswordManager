@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.Configuration;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using PasswordManager.Core.ConfigurationSettings;
+using PasswordManager.Core.Interfaces;
 using PasswordManager.Core.Registry;
 using StructureMap;
 
@@ -23,6 +25,12 @@ namespace PasswordManager.Core.Tests.xUnit
             services.Configure<AppSettingsConfiguration>(builder.Build().GetSection("AppSettings"));
 
             Container = new Container(new PasswordManagerRegistry(services));
+
+            var configurationSettings = Container.GetInstance<IConfigurationSettings>();
+
+            // set json file output to temp path for testing
+            string tempPath = Path.GetTempPath();
+            configurationSettings.StorageLocation = String.Format("{0}\\", tempPath);
         }
 
         public void Dispose()

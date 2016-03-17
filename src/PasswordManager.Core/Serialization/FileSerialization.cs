@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using Newtonsoft.Json;
 using PasswordManager.Core.Exceptions;
 using PasswordManager.Core.Interfaces;
@@ -27,6 +28,33 @@ namespace PasswordManager.Core.Serialization
             if (!String.IsNullOrEmpty(directoryName) && (!Directory.Exists(directoryName)))
             {
                 Directory.CreateDirectory(directoryName);
+            }
+        }
+
+        private static void WriteToFile(string filePath, string text, int retries)
+        {
+            const int maxRetries = 10;
+            try
+            {
+                using (var fs = File.Open(filePath, FileMode.Truncate))
+                {
+                    using (var sw = new StreamWriter(fs))
+                    {
+                        sw.WriteLine(text);
+                    }
+                }
+            }
+            catch (IOException)
+            {
+                if (retries < maxRetries)
+                {
+                    Thread.Sleep(1);
+                    WriteToFile(filePath, text, retries + 1);
+                }
+                else
+                {
+                    throw new Exception("Max retries reached.");
+                }
             }
         }
 
@@ -60,7 +88,7 @@ namespace PasswordManager.Core.Serialization
                 string json = JsonConvert.SerializeObject(o);
                 string encrypted = _encryptionStrategy.Encrypt(json, _configuration.DecryptedMasterKey);
 
-                File.WriteAllText(_configuration.GetFullPath(), encrypted);
+                WriteToFile(_configuration.GetFullPath(), encrypted, 5);
 
                 return true;
             }
@@ -83,14 +111,16 @@ namespace PasswordManager.Core.Serialization
                     return new List<T>();
                 }
 
+                string encryptedFile = null;
                 using (StreamReader file = File.OpenText(_configuration.GetFullPath()))
                 {
-                    string encryptedFile = file.ReadToEnd();
-
-                    string decriptedText = _encryptionStrategy.Decrypt(encryptedFile, _configuration.DecryptedMasterKey);
-
-                    return JsonConvert.DeserializeObject<List<T>>(decriptedText);
+                    encryptedFile = file.ReadToEnd();
                 }
+
+                string decriptedText = _encryptionStrategy.Decrypt(encryptedFile, _configuration.DecryptedMasterKey);
+
+                return JsonConvert.DeserializeObject<List<T>>(decriptedText);
+                
             }
             catch (Newtonsoft.Json.JsonReaderException ex)
             {
