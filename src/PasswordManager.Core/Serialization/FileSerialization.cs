@@ -33,7 +33,7 @@ namespace PasswordManager.Core.Serialization
 
         private static void WriteToFile(string filePath, string text, int retries)
         {
-            const int maxRetries = 10;
+            const int maxRetries = 20;
             try
             {
                 using (var fs = File.Open(filePath, FileMode.Truncate))
@@ -88,7 +88,7 @@ namespace PasswordManager.Core.Serialization
                 string json = JsonConvert.SerializeObject(o);
                 string encrypted = _encryptionStrategy.Encrypt(json, _configuration.DecryptedMasterKey);
 
-                WriteToFile(_configuration.GetFullPath(), encrypted, 5);
+                WriteToFile(_configuration.GetFullPath(), encrypted, 0);
 
                 return true;
             }
