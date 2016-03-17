@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace PasswordManager.Tests.Acceptance
@@ -28,6 +29,18 @@ namespace PasswordManager.Tests.Acceptance
             var content = response.Content;
 
             return content;
+        }
+
+        public string AddToList(string masterKey, PasswordEntity entity)
+        {
+            var request = new RestRequest("api/passwordManager", Method.POST);
+            request.AddHeader("X-Key", masterKey);
+
+            request.AddJsonBody(entity);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.Content;
         }
 
         public List<PasswordEntity> GetList(string masterKey)
