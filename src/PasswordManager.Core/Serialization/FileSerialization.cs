@@ -53,7 +53,7 @@ namespace PasswordManager.Core.Serialization
                 }
                 else
                 {
-                    throw new Exception("Max retries reached.");
+                    throw new Exception(String.Format("Max retries for file write reached: {0}", filePath));
                 }
             }
         }
