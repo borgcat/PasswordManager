@@ -53,7 +53,7 @@
 			Deployment 
 		</td>
 		<td>
-			Status 
+			Environment 
 		</td>
 		<td>
 			Version
@@ -65,12 +65,10 @@
 	
 	<tr>
 		<td>
-			PasswordManager.Api DIT
+			PasswordManager.Api 
 		</td>
 		<td>
-			<a href="http://teamcity.sdi.sogetilabs.com:8112/viewType.html?buildTypeId=SogetiUSAPasswordManager_ApiBuild&tab=buildTypeStatusDiv&branch_SogetiUSAPasswordManager=__all_branches__&guest=1">
-				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildType:(SogetiUSAPasswordManager_ApiBuild)/statusIcon"/>
-			</a>
+			DIT
 		</td>
 		<td>
 			<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/deploymentMod/passwordManagerApiDitVersion"/>
