@@ -76,7 +76,9 @@
 			<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/deploymentMod/passwordManagerApiDitVersion"/>
 		</td>
 		<td>
-			
+			<a href="http://sogeti-passwordmanager-api-dit.azurewebsites.net">
+				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildType:(SogetiUSAPasswordManager_ApiBuild)/statusIcon"/>
+			</a>
 		</td>
 	</tr>
 </table>
