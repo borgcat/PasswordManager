@@ -45,6 +45,46 @@
 	</tr>
 </table>
 <br/>
+<br/>
+#Deployment Status
+<table border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+			Deployment 
+		</td>
+		<td>
+			Status 
+		</td>
+		<td>
+			Version
+		</td>
+		<td>
+			Link
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			PasswordManager.Api DIT
+		</td>
+		<td>
+			<a href="http://teamcity.sdi.sogetilabs.com:8112/viewType.html?buildTypeId=SogetiUSAPasswordManager_ApiBuild&tab=buildTypeStatusDiv&branch_SogetiUSAPasswordManager=__all_branches__&guest=1">
+				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildType:(SogetiUSAPasswordManager_ApiBuild)/statusIcon"/>
+			</a>
+		</td>
+		<td>
+			<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/deploymentMod/passwordManagerApiDitVersion"/>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+</table>
+
+
+
+
+<br/>
 <img src="https://img.shields.io/github/commits-since/SogetiUSA/PasswordManager/1.0.0.svg"/>
 <br/>
 
