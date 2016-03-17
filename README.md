@@ -13,9 +13,6 @@
 		<td>
 			Test Status
 		</td>
-		<td>
-			Deployment Status
-		</td>
 	</tr>
 	
 	<tr>
