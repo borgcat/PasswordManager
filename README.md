@@ -58,9 +58,6 @@
 		<td>
 			Version
 		</td>
-		<td>
-			Link
-		</td>
 	</tr>
 	
 	<tr>
@@ -71,11 +68,8 @@
 			DIT
 		</td>
 		<td>
-			<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/deploymentMod/passwordManagerApiDitVersion"/>
-		</td>
-		<td>
 			<a href="http://sogeti-passwordmanager-api-dit.azurewebsites.net">
-				<img src="http://teamcity.sdi.sogetilabs.com:8112/app/rest/builds/buildType:(SogetiUSAPasswordManager_ApiBuild)/statusIcon"/>
+				<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/deploymentMod/passwordManagerApiDitVersion"/>
 			</a>
 		</td>
 	</tr>
