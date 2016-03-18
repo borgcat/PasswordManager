@@ -37,7 +37,7 @@ namespace PasswordManager.Core.Tests.xUnit
         {
             var configurationSettings = Container.GetInstance<IConfigurationSettings>();
 
-            if (File.Exists(configurationSettings.GetFullPath()))
+            if (!string.IsNullOrWhiteSpace(configurationSettings.EncryptedMasterKey) && File.Exists(configurationSettings.GetFullPath()))
                 File.Delete(configurationSettings.GetFullPath());
         }
 
