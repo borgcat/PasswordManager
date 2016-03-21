@@ -49,7 +49,7 @@ namespace PasswordManager.Core.ConfigurationSettings
         {
             get
             {
-                return _keyPersistenceStrategy.EncryptedMasterKey(MasterKey);
+                return _keyPersistenceStrategy?.EncryptedMasterKey(MasterKey);
             }
 
             set { _keyPersistenceStrategy.EncryptedMasterKey(value); }
