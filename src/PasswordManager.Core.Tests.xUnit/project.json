@@ -24,5 +24,8 @@
   "Hosting:Application": "PasswordManager.Core.Tests.xUnit",
   "frameworks": {
     "dnxcore50": { }
+  },
+  "tools": {
+    "dotnet-watch": "1.0.0-*"
   }
 }

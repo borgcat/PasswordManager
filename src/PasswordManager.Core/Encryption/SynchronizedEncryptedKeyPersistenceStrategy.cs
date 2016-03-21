@@ -57,6 +57,9 @@ namespace PasswordManager.Core.Encryption
 
         public string EncryptedMasterKey(string encryptedMaster)
         {
+            if (string.IsNullOrWhiteSpace(encryptedMaster))
+                return null;
+
             KeyState outKeyState;
             if (_concurrentState.TryGetValue(encryptedMaster, out outKeyState))
             {
