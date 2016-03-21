@@ -30,18 +30,7 @@
 			</a>
 		</td>
 	</tr>
-	<tr>
-		<td>
-			SpecFlow Acceptance
-		</td>
-		
-		<td>
-			<a href="http://teamcity.sdi.sogetilabs.com:8112/project.html?projectId=SogetiUSAPasswordManager&tab=preport_project1_SpecFlow_Status&branch_SogetiUSAPasswordManager=__all_branches__">
-				<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/acceptance/SogetiUSAPasswordManager_DitAcceptanceTestWithSpecFlow/teamCityMod/acceptanceStatus"/>
-			</a>
-			
-		</td>
-	</tr>
+	
 	<tr>
 		<td>
 			DIT Build
@@ -50,6 +39,12 @@
 			<a href="http://teamcity.sdi.sogetilabs.com:8112/viewType.html?buildTypeId=SogetiUSAPasswordManager_ApiBuild&tab=buildTypeStatusDiv&branch_SogetiUSAPasswordManager=__all_branches__&guest=1">
 				<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/build/SogetiUSAPasswordManager_ApiBuild/teamCityMod/buildStatus"/>
 			</a>
+		</td>
+		<td>
+			<a href="http://teamcity.sdi.sogetilabs.com:8112/project.html?projectId=SogetiUSAPasswordManager&tab=preport_project1_SpecFlow_Status&branch_SogetiUSAPasswordManager=__all_branches__">
+				<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/acceptance/SogetiUSAPasswordManager_DitAcceptanceTestWithSpecFlow/teamCityMod/acceptanceStatus"/>
+			</a>
+			
 		</td>
 	</tr>
 </table>
