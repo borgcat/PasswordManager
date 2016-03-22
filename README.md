@@ -105,7 +105,7 @@
 			</a>
 		</td>
 		<td>
-			This deployment is dependant on the acceptance test passing running against the dit api are all successful.
+			Deploys <b>if</b> Acceptance Tests pass.
 		</td>
 	</tr>
 </table>
