@@ -46,7 +46,7 @@
 			</a>
 			
 		</td>
-	</tr>
+	</tr>	
 </table>
 <br/>
 <br/>
@@ -79,6 +79,24 @@
 		<td>
 			<a href="http://sogeti-passwordmanager-api-dit.azurewebsites.net/swagger/ui/index.html">
 				Swagger UI
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			PasswordManager.Web
+		</td>
+		<td>
+			DIT
+		</td>
+		<td>
+			<a href="http://sogeti-passwordmanager-web-dit.azurewebsites.net">
+				<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/deploymentMod/passwordManagerWebDitVersion"/>
+			</a>
+		</td>
+		<td>
+			<a href="http://sogeti-passwordmanager-api-dit.azurewebsites.net">
+				Web UX
 			</a>
 		</td>
 	</tr>
