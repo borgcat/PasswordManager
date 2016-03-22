@@ -24,6 +24,7 @@ if($parsedJson)
     $azureComputerName = $parsedJson.azureComputerName
     $azureUserName = $parsedJson.azureUserName
 	$publishRuntime =  $parsedJson.azurePublishRuntime
+	$publishIISCommand = $parsedJson.iisCommand
 }
 
 Write-Host '----------------------------------------'
@@ -33,6 +34,7 @@ Write-Host 'published dest: ' $azureAppSite
 Write-Host 'published computername: ' $azureComputerName
 Write-Host 'published username: ' $azureUserName
 Write-Host 'published runtime: ' $publishRuntime
+Write-Host 'published iis-command: ' $publishIISCommand
 Write-Host '----------------------------------------'
 Write-Host
 
@@ -56,7 +58,7 @@ else
 Write-Host '----------------------------------------'
 $dnxPath = "{0}\.dnx\runtimes\dnx-{1}-win-{2}.{3}\bin\dnx.exe" -f $env:USERPROFILE, $dnxRuntime, $dnxArchitecture, $dnxVersion
 Write-Host $dnxPath ' from global.json'
-Write-Host '{0} from {1}' $publishRuntime 
+Write-Host '{0} from {1}' -f $publishRuntime, $profileJson
 Write-Host '----------------------------------------'
 
 & $env:USERPROFILE\.dnx\bin\dnvm use $dnxVersion -r coreclr -Persistent
@@ -72,7 +74,7 @@ try{
 	& dnu restore $PSScriptRoot\$project\project.json 
 	
 	Write-Host 'publishing project: ' $PSScriptRoot\$project\project.json
-	& dnu publish $PSScriptRoot\$project\project.json --configuration "$buildConfiguration"  --wwwroot "wwwroot" --wwwroot-out "wwwroot" -o $iisApp --iis-command "api" --runtime $publishRuntime
+	& dnu publish $PSScriptRoot\$project\project.json --configuration "$buildConfiguration"  --wwwroot "wwwroot" --wwwroot-out "wwwroot" -o $iisApp --iis-command $publishIISCommand --runtime $publishRuntime
     $msDeploy = "C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe"
     $iisDestProvider = "IisApp='{0}',ComputerName='{1}',UserName='{2}',Password='{3}',IncludeAcls='False',AuthType='Basic'" -f $azureAppSite, $azureComputerName, $azureUserName, $azurePassword
         
