@@ -59,7 +59,7 @@
 		<td>
 			Environment 
 		</td>
-		<td>
+		<td colspan="2">
 			Version
 		</td>
 	</tr>
@@ -74,6 +74,11 @@
 		<td>
 			<a href="http://sogeti-passwordmanager-api-dit.azurewebsites.net">
 				<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/deploymentMod/passwordManagerApiDitVersion"/>
+			</a>
+		</td>
+		<td>
+			<a href="http://sogeti-passwordmanager-api-dit.azurewebsites.net/swagger/ui/index.html">
+				Swagger UI
 			</a>
 		</td>
 	</tr>
