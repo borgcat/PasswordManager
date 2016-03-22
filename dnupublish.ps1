@@ -1,7 +1,6 @@
 [cmdletbinding(SupportsShouldProcess=$true)]
 param(
     [parameter(Mandatory=$true)] [string]$publishProfile,
-    [parameter(Mandatory=$true)] [string]$publishRuntime,
     [parameter(Mandatory=$true)] [string]$azurePassword
 )
 
@@ -24,6 +23,7 @@ if($parsedJson)
     $azureAppSite = $parsedJson.azureAppSite
     $azureComputerName = $parsedJson.azureComputerName
     $azureUserName = $parsedJson.azureUserName
+	$publishRuntime =  $parsedJson.azurePublishRuntime
 }
 
 Write-Host '----------------------------------------'
@@ -36,7 +36,6 @@ Write-Host 'published runtime: ' $publishRuntime
 Write-Host '----------------------------------------'
 Write-Host
 
-
 $publishLocation = "publish";
 
 # load up the global.json so we can find the DNX version
@@ -46,12 +45,20 @@ if($globalJson)
 {
     $dnxVersion = $globalJson.sdk.version
     $dnxRuntime = $globalJson.sdk.runtime
+	$dnxArchitecture = $globalJson.sdk.architecture
 }
 else
 {
     Write-Warning "Unable to locate global.json to determine using 'latest'"
     $dnxVersion = "latest"
 }
+
+Write-Host '----------------------------------------'
+$dnxPath = "{0}\.dnx\runtimes\dnx-{1}-win-{2}.{3}\bin\dnx.exe" -f $env:USERPROFILE, $dnxRuntime, $dnxArchitecture, $dnxVersion
+Write-Host $dnxPath ' from global.json'
+Write-Host '{0} from {1}' $publishRuntime 
+Write-Host '----------------------------------------'
+
 & $env:USERPROFILE\.dnx\bin\dnvm use $dnxVersion -r coreclr -Persistent
 $iisApp = "{0}\.{1}" -f $PSScriptRoot, $publishLocation
 $iisDeployApp = "{0}\wwwroot" -f $iisApp
