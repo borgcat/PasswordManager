@@ -57,8 +57,9 @@ else
 
 Write-Host '----------------------------------------'
 $dnxPath = "{0}\.dnx\runtimes\dnx-{1}-win-{2}.{3}\bin\dnx.exe" -f $env:USERPROFILE, $dnxRuntime, $dnxArchitecture, $dnxVersion
+$displaydnx = '{0} from {1}' -f $publishRuntime, $profileJson
 Write-Host $dnxPath ' from global.json'
-Write-Host '{0} from {1}' -f $publishRuntime, $profileJson
+Write-Host $displaydnx
 Write-Host '----------------------------------------'
 
 & $env:USERPROFILE\.dnx\bin\dnvm use $dnxVersion -r coreclr -Persistent
