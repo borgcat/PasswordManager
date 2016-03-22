@@ -62,6 +62,9 @@
 		<td colspan="2">
 			Version
 		</td>
+		<td>
+			Notes
+		</td>
 	</tr>
 	
 	<tr>
@@ -81,6 +84,8 @@
 				Swagger UI
 			</a>
 		</td>
+		<td>
+		</td>
 	</tr>
 	<tr>
 		<td>
@@ -90,14 +95,17 @@
 			DIT
 		</td>
 		<td>
-			<a href="http://sogeti-passwordmanager-web-dit.azurewebsites.net">
+			<a href="http://sogeti-passwordmanager-web-dit.azurewebsites.net/version">
 				<img src="http://teamcity.sdi.sogetilabs.com:3000/badge/deploymentMod/passwordManagerWebDitVersion"/>
 			</a>
 		</td>
 		<td>
-			<a href="http://sogeti-passwordmanager-api-dit.azurewebsites.net">
+			<a href="http://sogeti-passwordmanager-web-dit.azurewebsites.net">
 				Web UX
 			</a>
+		</td>
+		<td>
+			This deployment is dependant on the acceptance test passing running against the dit api are all successful.
 		</td>
 	</tr>
 </table>
