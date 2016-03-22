@@ -57,7 +57,7 @@
 			Deployment 
 		</td>
 		<td>
-			Environment 
+			Env
 		</td>
 		<td colspan="2">
 			Version
