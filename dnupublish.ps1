@@ -77,7 +77,7 @@ try{
     $iisDestProvider = "IisApp='{0}',ComputerName='{1}',UserName='{2}',Password='{3}',IncludeAcls='False',AuthType='Basic'" -f $azureAppSite, $azureComputerName, $azureUserName, $azurePassword
         
 	Write-Host "===== DEPLOY  ====="	
-	&$msDeploy -source:IisApp=$iisDeployApp -dest:$iisDestProvider -verb:sync -enableLink:contentLibExtension  -retryAttempts:2
+	&$msDeploy -source:IisApp=$iisDeployApp -dest:$iisDestProvider -verb:sync -enableLink:contentLibExtension -allowUntrusted -enableRule:DoNotDeleteRule -retryAttempts:2
 }
 catch{
     "An error occurred during publish.`n{0}" -f $_.Exception.Message | Write-Error
