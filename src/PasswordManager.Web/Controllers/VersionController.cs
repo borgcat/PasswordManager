@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Hosting;
+﻿using System.Reflection;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace PasswordManager.Api.Controllers
+namespace PasswordManager.Web.Controllers
 {
-    [Route("/")]
     [Route("/Version")]
     public class VersionController : Controller
     {
@@ -31,7 +25,7 @@ namespace PasswordManager.Api.Controllers
                 {
                     Project = new
                     {
-                        Api = new
+                        Web = new
                         {
                             Version = projectVersion
                         }
