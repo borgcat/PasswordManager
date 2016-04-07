@@ -8,7 +8,7 @@ import PasswordTableActions from '../actions/PasswordTableActions';
 class PasswordTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = PasswordTableStore.getState();
+        //this.state = PasswordTableStore.getState();
         this.onChange = this.onChange.bind(this);
     }
     
