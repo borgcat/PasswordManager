@@ -14,11 +14,15 @@ _ReSharper.*
 *[Rr]e[Ss]harper.user
 _ReSharper.*/
 **/packages/*
+**/GeneratedReports/*
 **/TestResults/*
 **/src/PasswordManager.Tests.Acceptance/TestResult.*
 **/src/PasswordManager.Tests.Acceptance/files.generated
 artifacts/*
 msbuild.log
+*.coverage.xml
+coverage.xml
+*.DotSettings
 PublishProfiles/
 *.psess
 *.vsp

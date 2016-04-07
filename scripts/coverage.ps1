@@ -1,4 +1,14 @@
-﻿$workingPath = (new-object system.io.directoryinfo $PSScriptRoot).parent.fullname
+﻿param(
+    [parameter(Mandatory=$true)] [string]$buildConfiguration
+)
+
+$workingPath = (new-object system.io.directoryinfo $PSScriptRoot).parent.fullname
+$outpath = $workingPath
+$project = $workingPath | split-path -leaf
+
+if([string]::IsNullOrWhitespace($buildConfiguration))
+	$buildConfiguration = "debug"
+	
 
 Write-Host '------------------------'
 Write-Host 'Running from ' $workingPath
@@ -13,13 +23,39 @@ if($globalJson)
     $dnxRuntime = $globalJson.sdk.runtime
     $dnxArchitecture = $globalJson.sdk.architecture
 }
- foreach ($project in $globalJson.projects) {
-    Write-Host 'restoring project: ' $workingPath\$project\project.json
-    & dnu restore $workingPath\$project\project.json 
+
+$dnxPath = "{0}\.dnx\runtimes\dnx-{1}-win-{2}.{3}\bin\dnx.exe" -f $env:USERPROFILE, $dnxRuntime, $dnxArchitecture, $dnxVersion
+
+$testRelativePath = $globalJson.projects | Where-Object {$_ -like '*xunit*'}
+
+$testProject = "{0}\{1}" -f $workingPath, $testRelativePath
+$OpenCoverUtil = "{0}\src\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe" -f $workingPath
+$ReportGeneratorUtil = "{0}\src\packages\ReportGenerator.2.4.4.0\tools\ReportGenerator.exe" -f $workingPath
+
+
+foreach($projectFile in $globalJson.projects | Where-Object {$_ -like '*xunit*'})
+{
+    $buildCommands=$buildCommands+$projectFile
+
+    if(Test-Path $testProject)
+    {
+        Write-Host "$testProject exists for $project"
+
+        cd $testProject
+        $projectName = $testProject | split-path -leaf
+        $outputXml = "{0}\{1}.coverage.xml" -f $workingPath, $projectName
+
+        $exe = "C:\Program Files (x86)\PowerShell Community Extensions\Pscx3\Pscx\Apps\echoargs.exe"
+
+        &$OpenCoverUtil -register:user -target:"$dnxPath" -targetargs:"--lib $testProject\bin\$buildConfiguration\dnxcore50 test" -output:$outputXml -skipautoprops -returntargetcode -filter:"+[*]* -[xunit*]*" 
+
+        cd $workingPath
+        &$ReportGeneratorUtil -reports:"$outputXml" -targetdir:"$workingPath\GeneratedReports\ReportGenerator Output"
+    }
 }
 
 
-$dnxPath = "{0}\.dnx\runtimes\dnx-{1}-win-{2}.{3}\bin\dnx.exe" -f $env:USERPROFILE, $dnxRuntime, $dnxArchitecture, $dnxVersion
+<# 
 Write-Host $dnxPath
 
 #$targetArgs = '"--lib {0}\src\PasswordManager.Api\bin\debug\dnxcore50 {0}\src\PasswordManager.Core.Tests.xUnit test"' -f $workingPath
@@ -31,4 +67,4 @@ $openCover = "{0}\src\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe" -f
 
 Write-Host $openCover -target:$dnxPath -targetargs:$targetArgs -output:coverage.xml -filter:+[Src]*
 
-&$openCover -target:$dnxPath -targetargs:$targetArgs -output:coverage.xml -filter:+[Src]*
+&$openCover -target:$dnxPath -targetargs:$targetArgs -output:coverage.xml -filter:+[Src]* #>
