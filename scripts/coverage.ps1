@@ -7,8 +7,9 @@ $outpath = $workingPath
 $project = $workingPath | split-path -leaf
 
 if([string]::IsNullOrWhitespace($buildConfiguration))
+{
 	$buildConfiguration = "debug"
-	
+}	
 
 Write-Host '------------------------'
 Write-Host 'Running from ' $workingPath
@@ -25,6 +26,10 @@ if($globalJson)
 }
 
 $dnxPath = "{0}\.dnx\runtimes\dnx-{1}-win-{2}.{3}\bin\dnx.exe" -f $env:USERPROFILE, $dnxRuntime, $dnxArchitecture, $dnxVersion
+
+Write-Host '------------------------'
+Write-Host 'using this runtime ' $dnxPath
+Write-Host '------------------------'
 
 $testRelativePath = $globalJson.projects | Where-Object {$_ -like '*xunit*'}
 
@@ -48,7 +53,7 @@ foreach($projectFile in $globalJson.projects | Where-Object {$_ -like '*xunit*'}
         $exe = "C:\Program Files (x86)\PowerShell Community Extensions\Pscx3\Pscx\Apps\echoargs.exe"
 
         &$OpenCoverUtil -register:user -target:"$dnxPath" -targetargs:"--lib $testProject\bin\$buildConfiguration\dnxcore50 test" -output:$outputXml -skipautoprops -returntargetcode -filter:"+[*]* -[xunit*]*" 
-
+				
         cd $workingPath
         &$ReportGeneratorUtil -reports:"$outputXml" -targetdir:"$workingPath\GeneratedReports\ReportGenerator Output"
     }
