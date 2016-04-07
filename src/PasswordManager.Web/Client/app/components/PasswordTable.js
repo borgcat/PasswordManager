@@ -18,7 +18,7 @@ class PasswordTable extends React.Component {
             if (!error && response) {
                 this.setState({ passwords: response.body });
             } else {
-                console.log('Avery is an error', error);
+                console.log('error', error);
             }
         }
     );
