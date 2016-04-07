@@ -52,7 +52,7 @@ foreach($projectFile in $globalJson.projects | Where-Object {$_ -like '*xunit*'}
 
         $exe = "C:\Program Files (x86)\PowerShell Community Extensions\Pscx3\Pscx\Apps\echoargs.exe"
 
-        &$OpenCoverUtil -register:user -target:"$dnxPath" -targetargs:`"--lib $testProject\bin\$buildConfiguration\dnxcore50 test`" -output:$outputXml -skipautoprops -returntargetcode -filter:`"+[*]* -[xunit*]*`" 
+        &$OpenCoverUtil -register:user -target:"$dnxPath" -targetargs:`"--lib $testProject\bin\$buildConfiguration\dnxcore50 test`" -output:$outputXml -skipautoprops -returntargetcode -filter:`"+[Password*]* -[xunit*]*`" 
 				
         cd $workingPath
         &$ReportGeneratorUtil -reports:"$outputXml" -targetdir:"$workingPath\GeneratedReports\ReportGenerator Output"
