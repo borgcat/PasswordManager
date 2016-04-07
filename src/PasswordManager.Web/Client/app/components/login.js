@@ -24,7 +24,7 @@ class Login extends React.Component {
                     <div className='row flipInX animated'>
 
                         {/* Login */}
-                        <div className='col-sm-8'>
+                        <div className='col-sm-10'>
                             <div className='panel panel-default'>
                                 <div className='panel-body'>
                                     <form>
@@ -32,7 +32,6 @@ class Login extends React.Component {
                                        
                                         {/* password input */}
                                         <div className={'form-group '}>
-                                            <label className='control-label'>Password</label>
                                             <input type='text' className='form-control' ref='passwordTextField'/>
                                         </div>
 

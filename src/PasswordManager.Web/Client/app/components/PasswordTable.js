@@ -8,7 +8,7 @@ import PasswordTableActions from '../actions/PasswordTableActions';
 class PasswordTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = PasswordTableStore.getState();
+        //this.state = PasswordTableStore.getState();
         this.onChange = this.onChange.bind(this);
     }
     
@@ -18,7 +18,7 @@ class PasswordTable extends React.Component {
             if (!error && response) {
                 this.setState({ passwords: response.body });
             } else {
-                console.log('Avery is an error', error);
+                console.log('error', error);
             }
         }
     );
