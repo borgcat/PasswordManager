@@ -86,6 +86,8 @@ gulp.task('lint', function () {
         .pipe(lint.format());
 });
 
+gulp.task('watch', shell.task(['dnx-watch web']));
+
 gulp.task('default', ['styles:production', 'vendor:production', 'lint']);
 gulp.task('build', ['styles', 'vendor', 'browserify']);
 
