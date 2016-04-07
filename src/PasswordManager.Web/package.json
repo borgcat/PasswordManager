@@ -4,6 +4,9 @@
   "scripts": {
     "pack": "webpack-dev-server"
   },
+  "scripts": {
+    "dev": "gulp browserify:production & dnx web"
+  },
   "version": "1.0.0",
   "repository": {
     "type": "git",
