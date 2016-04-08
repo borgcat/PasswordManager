@@ -28,8 +28,7 @@ class Login extends React.Component {
                             <div className='panel panel-default'>
                                 <div className='panel-body'>
                                     <form>
-                                        <h1><b>Enter your super secrect key</b></h1>
-                                       
+                                        <h1><b>Enter your super secrect key</b></h1>                                       
                                         {/* password input */}
                                         <div className={'form-group '}>
                                             <input type='text' className='form-control' ref='passwordTextField'/>
