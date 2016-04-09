@@ -33,7 +33,7 @@ class Header extends React.Component {
                 <div className="container">
                     <div className="navbar-header">
                         <div className="pull-left">
-                            <h2>Full Metal Engineering Password Manager</h2>
+                            <h2>Sogeti USA Password Manager</h2>
                         </div>
                     </div>
                 </div>
