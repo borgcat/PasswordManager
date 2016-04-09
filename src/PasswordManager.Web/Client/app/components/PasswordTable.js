@@ -129,7 +129,7 @@ var PasswordForm = React.createClass({
 });
 
 var PasswordTable = React.createClass({
-    loadCommentsFromServer: function() {
+    loadPasswordsFromServer: function() {
         $.ajax({
         url: this.props.api,
         dataType: 'json',
@@ -142,7 +142,7 @@ var PasswordTable = React.createClass({
         }.bind(this)
         });
     },
-    handleCommentSubmit: function(password) {
+    handlePasswordSubmit: function(password) {
         $.ajax({
         url: this.props.api,
         dataType: 'json',
@@ -160,15 +160,15 @@ var PasswordTable = React.createClass({
         return {data: []};
     },
     componentDidMount: function() {
-        this.loadCommentsFromServer();
-        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+        this.loadPasswordsFromServer();
+        setInterval(this.loadPasswordsFromServer, this.props.pollInterval);
     },
     render: function() {
         return (
-        <div className="commentBox">
+        <div className="passwordTable">
             <h1>Passwords</h1>
             <PasswordList data={this.state.data} />
-            <PasswordForm onCommentSubmit={this.handlePasswordSubmit} />
+            <PasswordForm onPasswordSubmit={this.handlePasswordSubmit} />
         </div>
         );
     }
